@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="css/estilo.css" />
+
+  <title>Bases de datos</title>
+</head>
+
+<body>
+
+  <div class="container">
+    <!-- Crear -->
+    <form id="contact" name="form1" action="" method="post">
+      <h3>Taller Base de datos <h3 style="color:#FF0F49";>UNIVALLE</h3></h3>
+      <h4><b>Crear un paciente:</b></b>
+        <br>Ingrese los datos del paciente</br></h4>
+      <fieldset>
+        <input placeholder="Nombre Paciente" name="nombre" type="text" tabindex="1" required autofocus>
+      </fieldset>
+      <fieldset>
+        <input placeholder="Apellido Paciente" name="apellido" type="text" tabindex="1" required autofocus>
+      </fieldset>
+      <fieldset>
+        <input placeholder="Id Paciente" name="identificacion" type="text" tabindex="2" required>
+      </fieldset>
+      <fieldset>
+        <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" onclick="location.reload()">Enviar</button>
+      </fieldset>
+    </form>
+
+    <!-- Actualizar -->
+    <form id="contact" name="form2" action="" method="post">
+      <h3>Taller Base de datos <h3 style="color:#FF0F49";>UNIVALLE</h3></h3>
+      <h4><b>Actualizar un paciente:</b></b>
+      <br>Ingrese los nuevos datos del paciente</br></h4>
+      <fieldset>
+        <input placeholder="Nombre Paciente" name="nombre" type="text" tabindex="1" required autofocus>
+      </fieldset>
+      <fieldset>
+        <input placeholder="Apellido Paciente" name="apellido" type="text" tabindex="1" required autofocus>
+      </fieldset>
+      <fieldset>
+        <input placeholder="Id Paciente" name="identificacion" type="text" tabindex="2" required>
+      </fieldset>
+      <fieldset>
+        <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" onclick="location.reload()">Enviar</button>
+      </fieldset>
+    </form>
+
+    <!-- Delete -->
+    <form id="contact" name="form3" action="" method="post">
+      <h3>Taller Base de datos <h3 style="color:#FF0F49";>UNIVALLE</h3></h3>
+      <h4><b>Borrar un paciente:</b></b>
+      <br>Ingrese el numero de identificacion del paciente</br></h4>
+
+      <fieldset>
+        <input placeholder="Id Paciente" name="identificacion" type="text" tabindex="2" required>
+      </fieldset>
+      <fieldset>
+        <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" onclick="location.reload()">Enviar</button>
+      </fieldset>
+    </form>
+
+    <div class="" id="wrapped">
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              <td></td>
+            </td>
+          </tr>
+        <tbody>
+      </table>
+    </div>
+
+    <form id="crud_select" action="" method="post">
+      <fieldset>
+      <button name="create" type="crud" id="crud-create" data-submit="...Sending">Crear</button>
+      <button name="read" type="crud" id="crud-read" data-submit="...Sending">Leer</button>
+      <button name="update" type="crud" id="crud-update" data-submit="...Sending">Actualizar</button>  
+      <button name="delete" type="crud" id="crud-delete" data-submit="...Sending">Borrar</button>              
+    </fieldset>
+    </form>
+    
+    <script type="text/javascript">
+    var arrayDatos;
+      function graficarTabla(){
+
+        fetch('/basedatos/consultatotalpacientes')
+      .then((res) => res.json())
+      .then((data) => {      
+        console.log(data.length);
+        var numColumnas = 3;
+        var numFilas = data.length;
+        var codigoHTML="<table><tbody>";//border=\" 1 \"
+          codigoHTML+="<tr><td><b> Nombre </b></td><td><b> Apellido </b></td><td><b> Identificaci&oacuten </b></td></tr>";
+          codigoHTML+="<tr>";
+          for (let i = 0; i < numFilas; i++) {
+            codigoHTML+="<td>"+data[i].nombre+"</td>";  
+            codigoHTML+="<td>"+data[i].apellido+"</td>";  
+            codigoHTML+="<td>"+data[i].numid+"</td>";           
+            codigoHTML+="</tr>";
+          }
+        codigoHTML+="</tbody></table>";
+        document.getElementById("wrapped").innerHTML = codigoHTML;
+      });        
+      }
+      graficarTabla();
+    </script>
+
+  </div>
+
+
+  <script src="app.js"></script>
+</body>
+
+</html>
